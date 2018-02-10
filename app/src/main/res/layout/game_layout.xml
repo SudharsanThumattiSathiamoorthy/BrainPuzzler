@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/counterTextView"
         android:layout_width="88dp"
         android:layout_height="47dp"
         android:layout_marginBottom="8dp"
@@ -53,7 +53,7 @@
         app:layout_constraintBottom_toTopOf="@+id/start_button"
         app:layout_constraintEnd_toStartOf="@+id/scoreTextView"
         app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/counterTextView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.059" />
 
@@ -145,6 +145,7 @@
         android:text="Correct!"
         android:textAlignment="center"
         android:textSize="45sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

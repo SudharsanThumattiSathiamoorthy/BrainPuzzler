@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="correctAnswer">#99E699</color>
     <color name="wrongAnswer">#ff0000</color>
+    <color name="gameOver">#f4ad42</color>
+    <color name="white">#ffffff</color>
 </resources>
