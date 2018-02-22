@@ -8,13 +8,13 @@
 
     <Button
         android:id="@+id/start_button"
+        style="@style/OrangeButton"
         android:layout_width="187dp"
         android:layout_height="136dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:backgroundTint="@android:color/holo_green_light"
         android:onClick="startGame"
         android:padding="40dp"
         android:text="@string/start"

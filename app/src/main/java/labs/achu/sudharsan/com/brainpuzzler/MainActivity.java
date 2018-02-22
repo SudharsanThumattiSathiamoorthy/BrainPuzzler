@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView counterTextView = findViewById(R.id.counterTextView);
         final TextView resulTextView = findViewById(R.id.resultTextView);
 
-        new CountDownTimer(6000, 1000) {
+        new CountDownTimer(45000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 counterTextView.setText(String.valueOf(millisUntilFinished / 1000) + "s");
@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         changeToGameLayout(view);
     }
+
     private void setNextQuestion() {
         // Clear the existing entries in answer list.
         this.answerList.clear();
