@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/game_start_layout_gradient"
     tools:context="labs.achu.sudharsan.com.brainpuzzler.MainActivity">
 
     <Button
@@ -14,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:backgroundTint="@android:color/holo_green_light"
+        android:background="@drawable/start_button"
         android:onClick="startGame"
         android:padding="40dp"
         android:text="@string/start"

@@ -1,6 +1,7 @@
 package labs.achu.sudharsan.com.brainpuzzler;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -11,22 +12,45 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
+import labs.achu.sudharsan.com.brainpuzzler.utils.PuzzleAnswer;
 
 import static labs.achu.sudharsan.com.brainpuzzler.utils.BrainPuzzlerConstants.BRAIN_PUZZLER;
 import static labs.achu.sudharsan.com.brainpuzzler.utils.BrainPuzzlerConstants.MAIN_ACTIVITY;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final GradientDrawable CORRECT_ANSWER;
+    private static final GradientDrawable WRONG_ANSWER;
+    private static final Map<PuzzleAnswer, GradientDrawable> GRADIENT_DRAWABLE_MAP;
+
+    static {
+        CORRECT_ANSWER = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFF24FE41, 0xFFFDFC47});
+        CORRECT_ANSWER.setCornerRadius(25.0f);
+        CORRECT_ANSWER.setShape(GradientDrawable.RECTANGLE);
+
+        WRONG_ANSWER = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT,
+                new int[]{0xFFEE0979, 0xFFFF6A00});
+        WRONG_ANSWER.setCornerRadius(25.0f);
+        WRONG_ANSWER.setShape(GradientDrawable.RECTANGLE);
+
+        final Map<PuzzleAnswer, GradientDrawable> gradientDrawableMap = new HashMap<>();
+        gradientDrawableMap.put(PuzzleAnswer.CORRECT_ANSWER, CORRECT_ANSWER);
+        gradientDrawableMap.put(PuzzleAnswer.WRONG_ANSER, WRONG_ANSWER);
+
+        GRADIENT_DRAWABLE_MAP = Collections.unmodifiableMap(gradientDrawableMap);
+    }
+
     private Button startButton;
-
     private List<Integer> answerList = new ArrayList<>();
-
     private int correctAnswerLocation;
-
     private int noOfCorrectAnswers;
-
     private int noOfTotalQuestions;
 
     public void changeToGameLayout(final View view) {
@@ -40,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView counterTextView = findViewById(R.id.counterTextView);
         final TextView resulTextView = findViewById(R.id.resultTextView);
 
-        new CountDownTimer(6000, 1000) {
+        new CountDownTimer(5000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 counterTextView.setText(String.valueOf(millisUntilFinished / 1000) + "s");
@@ -48,21 +72,23 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                 counterTextView.setText("0s");
+                counterTextView.setText("0s");
 
-                 resulTextView.setVisibility(View.VISIBLE);
-                 resulTextView.setText("Game Over!!");
+                resulTextView.setVisibility(View.VISIBLE);
+                resulTextView.setText("Game Over!!");
 
-                 resulTextView.setBackgroundResource(R.color.gameOver);
+                resulTextView.setBackgroundResource(R.color.gameOver);
 
-                 setContentView(R.layout.game_over_layout);
+                setContentView(R.layout.game_over_layout);
 
-                 final TextView scoreTextView = findViewById(R.id.scoreTextView);
-                 scoreTextView.setText("You scored: " + noOfCorrectAnswers + "/" + noOfTotalQuestions);
+                final TextView scoreTextView = findViewById(R.id.scoreTextView);
+                scoreTextView.setText("You scored: " + noOfCorrectAnswers + "/" + noOfTotalQuestions);
             }
         }.start();
 
         setNextQuestion();
+
+        Toast.makeText(this, "Please select answer from above 4 buttons.", Toast.LENGTH_LONG).show();
     }
 
     public void restartGame(final View view) {
@@ -71,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         changeToGameLayout(view);
     }
+
     private void setNextQuestion() {
         // Clear the existing entries in answer list.
         this.answerList.clear();
@@ -119,15 +146,14 @@ public class MainActivity extends AppCompatActivity {
         resultTextView.setVisibility(View.VISIBLE);
 
         if (selectedTag.equals(String.valueOf(correctAnswerLocation))) {
-            Toast.makeText(MainActivity.this, "Correct Answer!!", Toast.LENGTH_LONG);
             resultTextView.setText("Correct!!");
-            resultTextView.setBackgroundResource(R.color.correctAnswer);
 
+            resultTextView.setBackground(GRADIENT_DRAWABLE_MAP.get(PuzzleAnswer.CORRECT_ANSWER));
             this.noOfCorrectAnswers++;
         } else {
             resultTextView.setText("Wrong!!");
-            Toast.makeText(MainActivity.this, "Wrong Answer!!", Toast.LENGTH_LONG);
-            resultTextView.setBackgroundResource(R.color.wrongAnswer);
+
+            resultTextView.setBackground(GRADIENT_DRAWABLE_MAP.get(PuzzleAnswer.WRONG_ANSER));
         }
 
         // Update the score text view.
@@ -141,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.game_start);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
