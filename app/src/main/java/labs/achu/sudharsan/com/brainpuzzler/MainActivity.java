@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView counterTextView = findViewById(R.id.counterTextView);
         final TextView resulTextView = findViewById(R.id.resultTextView);
 
-        new CountDownTimer(5000, 1000) {
+        new CountDownTimer(45000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 counterTextView.setText(String.valueOf(millisUntilFinished / 1000) + "s");

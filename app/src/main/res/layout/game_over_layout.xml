@@ -51,6 +51,7 @@
 
     <Button
         android:id="@+id/button"
+        style="@style/LightBlueButton"
         android:layout_width="250dp"
         android:layout_height="76dp"
         android:layout_marginBottom="8dp"
