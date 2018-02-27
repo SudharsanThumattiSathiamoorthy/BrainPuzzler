@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,8 +24,10 @@ import java.util.Random;
 
 import labs.achu.sudharsan.com.brainpuzzler.utils.PuzzleAnswer;
 
+import static labs.achu.sudharsan.com.brainpuzzler.utils.BrainPuzzlerConstants.ANSWER_INDEX;
 import static labs.achu.sudharsan.com.brainpuzzler.utils.BrainPuzzlerConstants.BRAIN_PUZZLER;
 import static labs.achu.sudharsan.com.brainpuzzler.utils.BrainPuzzlerConstants.MAIN_ACTIVITY;
+import static labs.achu.sudharsan.com.brainpuzzler.utils.BrainPuzzlerConstants.MAX_BOUND;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
     private int noOfCorrectAnswers;
     private int noOfTotalQuestions;
 
+    private AdView mAdViewGameStart;
+    private AdView mAdViewGameOver;
+
     public void changeToGameLayout(final View view) {
         this.startButton.setVisibility(View.INVISIBLE);
 
@@ -79,7 +88,18 @@ public class MainActivity extends AppCompatActivity {
 
                 resulTextView.setBackgroundResource(R.color.gameOver);
 
+                // Change to game over layout and load its components.
                 setContentView(R.layout.game_over_layout);
+
+                // Load the ad on the game over layout.
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdViewGameOver = findViewById(R.id.adViewGameOver);
+                        final AdRequest adRequest = new AdRequest.Builder().build();
+                        mAdViewGameOver.loadAd(adRequest);
+                    }
+                });
 
                 final TextView scoreTextView = findViewById(R.id.scoreTextView);
                 scoreTextView.setText("You scored: " + noOfCorrectAnswers + "/" + noOfTotalQuestions);
@@ -99,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setNextQuestion() {
+        Log.d(BRAIN_PUZZLER, "Entered next question method.");
+
         // Clear the existing entries in answer list.
         this.answerList.clear();
 
@@ -114,17 +136,17 @@ public class MainActivity extends AppCompatActivity {
         final Button resultButton3 = findViewById(R.id.result_button_3);
         final Button resultButton4 = findViewById(R.id.result_button_4);
 
-        correctAnswerLocation = random.nextInt(4);
+        correctAnswerLocation = random.nextInt(ANSWER_INDEX);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < ANSWER_INDEX; i++) {
             if (i == correctAnswerLocation) {
                 answerList.add(firstNo + secondNo);
             } else {
 
-                int incorrectAnswer = random.nextInt(98);
+                int incorrectAnswer = random.nextInt(MAX_BOUND);
 
                 while (incorrectAnswer == firstNo + secondNo) {
-                    incorrectAnswer = random.nextInt(98);
+                    incorrectAnswer = random.nextInt(MAX_BOUND);
                 }
 
                 answerList.add(incorrectAnswer);
@@ -135,10 +157,12 @@ public class MainActivity extends AppCompatActivity {
         resultButton2.setText(Integer.toString(answerList.get(1)));
         resultButton3.setText(Integer.toString(answerList.get(2)));
         resultButton4.setText(Integer.toString(answerList.get(3)));
+
+        Log.d(BRAIN_PUZZLER, "Set next question is done.");
     }
 
     public void verifyAnswer(final View view) {
-        Log.i(BRAIN_PUZZLER, (String) view.getTag());
+        Log.v(BRAIN_PUZZLER, (String) view.getTag());
 
         final String selectedTag = (String) view.getTag();
 
@@ -161,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView scoreTextView = findViewById(R.id.scoreTextView);
         scoreTextView.setText(Integer.toString(this.noOfCorrectAnswers) + "/" + Integer.toString(this.noOfTotalQuestions));
 
+        Log.d(BRAIN_PUZZLER, "Calling set next question method.");
         setNextQuestion();
     }
 
@@ -174,6 +199,25 @@ public class MainActivity extends AppCompatActivity {
 
         startButton = findViewById(R.id.start_button);
         startButton.setVisibility(View.VISIBLE);
+
+        // Initialize the mobile ads.
+        Log.d(BRAIN_PUZZLER, "Initialize mobile ads.");
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+
+        Log.d(BRAIN_PUZZLER, "Loading mobile ad on game start screen.");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    mAdViewGameStart = findViewById(R.id.adViewGameStart);
+                    final AdRequest adRequest = new AdRequest.Builder().
+                            build();
+                    mAdViewGameStart.loadAd(adRequest);
+                } catch (final Exception e) {
+                    Log.e(BRAIN_PUZZLER, e.getMessage());
+                }
+            }
+        });
     }
 
     @SuppressLint("LongLogTag")
