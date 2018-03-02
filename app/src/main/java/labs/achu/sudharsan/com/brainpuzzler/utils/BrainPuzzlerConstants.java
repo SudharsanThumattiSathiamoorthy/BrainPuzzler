@@ -12,4 +12,10 @@ public class BrainPuzzlerConstants {
     public final static int MAX_BOUND = 98;
 
     public final static int ANSWER_INDEX = 4;
+
+    public final static String APP_ID = "ca-app-pub-8076968279430537~7085299016";
+
+    public final static String PUB_ID = "pub-8076968279430537";
+
+    public final static String BANNER_ID = "ca-app-pub-8076968279430537/7763955860";
 }

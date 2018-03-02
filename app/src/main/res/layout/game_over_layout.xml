@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/game_start_layout_gradient"
+    android:background="@drawable/game_layout_gradient"
     android:foregroundGravity="center">
 
     <TextView
