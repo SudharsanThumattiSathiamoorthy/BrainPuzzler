@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
         setNextQuestion();
 
-        Toast.makeText(this, "Please select answer from above 4 buttons.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Please select answer " + "\n" + "from above 4 buttons.", Toast.LENGTH_LONG).show();
     }
 
     public void restartGame(final View view) {
