@@ -1,8 +1,13 @@
+/*
+ * Copyright © 2018 Achu Labs. All Rights Reserved.
+ * Author: Sudharsan Thumatti Sathiamoorthy
+ */
+
 package labs.achu.sudharsan.com.brainpuzzler;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

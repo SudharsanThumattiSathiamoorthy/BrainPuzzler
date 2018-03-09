@@ -1,4 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright © 2018 Achu Labs. All Rights Reserved.
+  ~ Author: Sudharsan Thumatti Sathiamoorthy
+  -->
+
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>

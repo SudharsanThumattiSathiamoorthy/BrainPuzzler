@@ -1,3 +1,8 @@
+/*
+ * Copyright © 2018 Achu Labs. All Rights Reserved.
+ * Author: Sudharsan Thumatti Sathiamoorthy
+ */
+
 package labs.achu.sudharsan.com.brainpuzzler.utils;
 
 /**

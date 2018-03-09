@@ -1,3 +1,8 @@
+<!--
+  ~ Copyright © 2018 Achu Labs. All Rights Reserved.
+  ~ Author: Sudharsan Thumatti Sathiamoorthy
+  -->
+
 <resources>
     <string name="app_name">Brain Puzzler</string>
     <string name="start">START</string>
