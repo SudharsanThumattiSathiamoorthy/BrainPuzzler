@@ -214,8 +214,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d(BRAIN_PUZZLER, "Initialize mobile ads.");
 
         // Test App ID.
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
-        // MobileAds.initialize(this, "ca-app-pub-8076968279430537~7085299016");
+        // MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this, "ca-app-pub-8076968279430537~7085299016");
 
         Log.d(BRAIN_PUZZLER, "Loading mobile ad on game start screen.");
         runOnUiThread(new Runnable() {

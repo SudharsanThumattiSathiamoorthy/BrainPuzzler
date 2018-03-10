@@ -84,7 +84,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        ads:adUnitId="ca-app-pub-8076968279430537/7763955860"
         ads:layout_constraintBottom_toBottomOf="parent"
         ads:layout_constraintEnd_toEndOf="parent"
         ads:layout_constraintHorizontal_bias="0.493"
@@ -92,5 +92,9 @@
         ads:layout_constraintTop_toBottomOf="@+id/button"
         ads:layout_constraintVertical_bias="1.0"></com.google.android.gms.ads.AdView>
 
+    <!--Production AdMobId-->
+    <!--ca-app-pub-8076968279430537/7763955860-->
+
+    <!--Test AdMob Id-->
     <!--ads:adUnitId="ca-app-pub-3940256099942544/6300978111"-->
 </android.support.constraint.ConstraintLayout>
