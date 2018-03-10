@@ -20,13 +20,12 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 import labs.achu.sudharsan.com.brainpuzzler.utils.PuzzleAnswer;
 
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Button startButton;
-    private Set<Integer> answerList = new HashSet<>();
+    private List<Integer> answerList = new ArrayList<>();
     private int correctAnswerLocation;
     private int noOfCorrectAnswers;
     private int noOfTotalQuestions;
@@ -147,24 +146,27 @@ public class MainActivity extends AppCompatActivity {
         final Button resultButton4 = findViewById(R.id.result_button_4);
 
         correctAnswerLocation = random.nextInt(ANSWER_INDEX);
-        this.answerList.add(firstNo + secondNo);
+        for (int i = 0; i < ANSWER_INDEX; i++) {
+            if (i == correctAnswerLocation) {
+                answerList.add(firstNo + secondNo);
+            } else {
 
-        // Populate the answer list with unique numbers.
-        while (this.answerList.size() < ANSWER_INDEX) {
+                int incorrectAnswer = random.nextInt(MAX_BOUND);
 
-            int incorrectAnswer = random.nextInt(MAX_BOUND);
+                while ((incorrectAnswer == firstNo + secondNo) ||
+                        this.answerList.contains(incorrectAnswer) ||
+                        incorrectAnswer == 0) {
+                    incorrectAnswer = random.nextInt(MAX_BOUND);
+                }
 
-            if (!this.answerList.contains(incorrectAnswer) && incorrectAnswer != 0) {
                 answerList.add(incorrectAnswer);
             }
         }
 
-        final Iterator<Integer> iterator = this.answerList.iterator();
-
-        resultButton1.setText(Integer.toString(iterator.next()));
-        resultButton2.setText(Integer.toString(iterator.next()));
-        resultButton3.setText(Integer.toString(iterator.next()));
-        resultButton4.setText(Integer.toString(iterator.next()));
+        resultButton1.setText(Integer.toString(this.answerList.get(0)));
+        resultButton2.setText(Integer.toString(this.answerList.get(1)));
+        resultButton3.setText(Integer.toString(this.answerList.get(2)));
+        resultButton4.setText(Integer.toString(this.answerList.get(3)));
 
         Log.d(BRAIN_PUZZLER, "Set next question is done.");
     }
@@ -212,8 +214,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d(BRAIN_PUZZLER, "Initialize mobile ads.");
 
         // Test App ID.
-        // MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
-        MobileAds.initialize(this, "ca-app-pub-8076968279430537~7085299016");
+        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        // MobileAds.initialize(this, "ca-app-pub-8076968279430537~7085299016");
 
         Log.d(BRAIN_PUZZLER, "Loading mobile ad on game start screen.");
         runOnUiThread(new Runnable() {
